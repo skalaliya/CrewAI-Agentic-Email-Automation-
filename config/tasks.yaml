@@ -1,0 +1,47 @@
+classify_email:
+  description: >
+    Analyze the provided email text and classify it as either spam or ham (legitimate).
+    Use the machine learning model's prediction along with your expertise to provide
+    a final classification. Consider factors such as suspicious links, urgency tactics,
+    grammatical errors, and sender authenticity.
+  expected_output: >
+    A classification result indicating whether the email is spam or ham, along with
+    a confidence score and brief explanation of the reasoning.
+
+extract_information:
+  description: >
+    Extract all relevant information from the provided email including:
+    - Sender information
+    - Subject line
+    - Key dates and times mentioned
+    - Named entities (people, organizations, locations)
+    - Action items or requests
+    - Important links or attachments mentioned
+  expected_output: >
+    A structured summary of extracted information including all identified entities,
+    dates, action items, and other relevant details from the email.
+
+draft_response:
+  description: >
+    Based on the email content and context provided, draft an appropriate response.
+    The response should:
+    - Match the tone and formality of the original email
+    - Address all points raised in the email
+    - Be clear, concise, and professional
+    - Include appropriate greetings and closings
+  expected_output: >
+    A complete draft email response that is ready to send, including subject line,
+    greeting, body, and closing signature.
+
+process_pipeline:
+  description: >
+    Execute the complete email processing pipeline:
+    1. Classify the email as spam or ham
+    2. If ham, extract key information
+    3. Generate insights and recommendations
+    4. If appropriate, draft a response
+    Coordinate all steps and provide a comprehensive analysis.
+  expected_output: >
+    A comprehensive report including classification results, extracted information,
+    insights, and a drafted response if applicable. The report should be well-structured
+    and actionable.
