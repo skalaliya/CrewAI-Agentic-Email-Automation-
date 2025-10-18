@@ -162,6 +162,14 @@ print(f"Draft: {result['draft']}")
 
 ## JavaScript/Node.js Client Example
 
+First, install the axios dependency:
+
+```bash
+npm install axios
+```
+
+Then use it in your code:
+
 ```javascript
 const axios = require('axios');
 

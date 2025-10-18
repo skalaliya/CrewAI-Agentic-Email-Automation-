@@ -12,9 +12,11 @@
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/skalaliya/CrewAI-Agentic-Email-Automation-.git
+git clone https://github.com/<username>/CrewAI-Agentic-Email-Automation-.git
 cd CrewAI-Agentic-Email-Automation-
 ```
+
+Replace `<username>` with your GitHub username or the repository owner.
 
 ### 2. Create Virtual Environment
 
