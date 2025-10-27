@@ -1,0 +1,125 @@
+# CrewAI Crew Configuration
+# Main crew setup and coordination settings
+
+email_processing_crew:
+  name: "Email Processing Crew"
+  description: >
+    A specialized crew for comprehensive email processing, classification, and response generation.
+    This crew combines machine learning models with intelligent agents to provide enterprise-grade
+    email automation capabilities.
+  
+  # Crew composition and workflow
+  agents:
+    - spam_classifier
+    - email_extractor  
+    - email_drafter
+    - pipeline_coordinator
+  
+  # Default tasks available to the crew
+  available_tasks:
+    - classify_email
+    - extract_information
+    - draft_response
+    - process_pipeline
+  
+  # Crew execution settings
+  process: "sequential"  # or "hierarchical"
+  verbose: true
+  memory: true
+  cache: true
+  max_rpm: 10
+  share_crew: false
+  
+  # Quality and performance settings
+  step_callback: null
+  task_callback: null
+  
+  # Crew management settings
+  manager_llm: null  # Use default LLM for manager
+  manager_agent: "pipeline_coordinator"  # Default manager
+  
+  # Output and reporting
+  output_log_file: "logs/crew_execution.log"
+  
+# Specialized crew configurations for specific use cases
+specialized_crews:
+  
+  spam_detection_crew:
+    name: "Spam Detection Crew"
+    description: "Focused crew for email security and spam classification"
+    agents: [spam_classifier]
+    available_tasks: [classify_email]
+    process: "sequential"
+    verbose: true
+    
+  information_extraction_crew:
+    name: "Information Extraction Crew" 
+    description: "Specialized crew for data mining and information extraction"
+    agents: [email_extractor]
+    available_tasks: [extract_information]
+    process: "sequential"
+    verbose: true
+    
+  response_drafting_crew:
+    name: "Response Drafting Crew"
+    description: "Expert crew for professional email composition"
+    agents: [email_drafter]
+    available_tasks: [draft_response]
+    process: "sequential"
+    verbose: true
+
+# Environment and LLM configuration
+llm_settings:
+  default_llm: "ollama"  # or "openai", "anthropic", etc.
+  fallback_llm: "openai"
+  
+  ollama:
+    model: "qwen2.5-coder:7b"
+    base_url: "http://localhost:11434"
+    temperature: 0.7
+    max_tokens: 2048
+    
+  openai:
+    model: "gpt-4"
+    temperature: 0.7
+    max_tokens: 2048
+
+# Execution policies and constraints
+execution_policies:
+  max_execution_time: 300  # 5 minutes
+  max_iterations: 10
+  retry_attempts: 3
+  timeout_handling: "graceful_degradation"
+  
+  # Quality gates
+  min_confidence_threshold: 0.7
+  require_human_review: false
+  auto_escalation: true
+  
+# Monitoring and logging
+monitoring:
+  enable_telemetry: true
+  log_level: "INFO"
+  performance_tracking: true
+  error_reporting: true
+  
+  metrics:
+    - execution_time
+    - token_usage
+    - success_rate
+    - confidence_scores
+
+# Integration settings
+integrations:
+  webhooks:
+    enabled: false
+    endpoints: []
+    
+  api_callbacks:
+    enabled: false
+    success_callback: null
+    error_callback: null
+    
+  external_tools:
+    enabled: true
+    tool_discovery: true

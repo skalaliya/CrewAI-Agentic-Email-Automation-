@@ -1,0 +1,172 @@
+# CrewAI Tasks Configuration
+# Clean YAML-based task definitions following CrewAI best practices
+# Variables like {email_content} and {ml_prediction} will be replaced with actual values
+
+classify_email:
+  description: >
+    Analyze the provided email text and classify it as either spam or ham (legitimate). 
+    Use the machine learning model's prediction along with your expertise to provide a 
+    final classification. Consider factors such as:
+    
+    - Suspicious links or attachments
+    - Urgency tactics and pressure language
+    - Grammatical errors and poor formatting
+    - Sender authenticity and domain reputation
+    - Common spam keywords and phrases
+    - Social engineering attempts
+    - Financial requests or offers
+    - Professional context and business relevance
+    
+    Email to classify: {email_content}
+    ML Model Prediction: {ml_prediction}
+    
+    Provide a confidence score (0-100%) and detailed reasoning for your classification.
+    If the ML model provides a prediction, compare it with your analysis and explain 
+    any differences in your assessment.
+  expected_output: >
+    A structured classification result containing:
+    1. Final Classification: "Spam" or "Ham"
+    2. Confidence Score: Percentage (0-100%)
+    3. Detailed Reasoning: Step-by-step analysis of classification factors
+    4. Risk Assessment: Potential threats identified (for spam emails)
+    5. ML Model Comparison: How your assessment compares to the ML prediction (if available)
+    6. Recommended Action: Suggested handling for this email type
+  agent: spam_classifier
+  context: []
+  tools: []
+  async_execution: false
+
+extract_information:
+  description: >
+    Thoroughly analyze the email content and extract all relevant structured information. 
+    Focus on identifying and categorizing key business elements:
+    
+    - Sender Information: Name, email, company, role/title
+    - Recipients: Primary and CC recipients
+    - Temporal Data: Dates, times, deadlines, scheduled events
+    - Contact Information: Phone numbers, addresses, meeting details
+    - Business Entities: Companies, organizations, departments
+    - Financial Information: Amounts, currencies, payment terms
+    - Action Items: Tasks, requests, deadlines, follow-ups
+    - Document References: Attachments, links, external resources
+    - Priority Indicators: Urgency markers, importance levels
+    - Sentiment Analysis: Tone, emotion, relationship context
+    
+    Email to analyze: {email_content}
+    
+    Organize the extracted information in a clear, structured format that can be 
+    easily processed by other systems or human reviewers.
+  expected_output: >
+    A comprehensive structured data extraction containing:
+    1. Sender Profile: Complete sender information and verification status
+    2. Communication Timeline: All dates, times, and scheduling information
+    3. Contact Directory: All contact information found in the email
+    4. Business Context: Companies, departments, and organizational relationships
+    5. Financial Data: Any monetary information, terms, or commitments
+    6. Action Items List: All tasks, requests, and deadlines with priorities
+    7. Resource References: Links, attachments, and external documents
+    8. Sentiment & Tone Analysis: Communication style and relationship indicators
+    9. Priority Assessment: Urgency and importance scoring
+    10. Processing Recommendations: Suggested next steps for handling
+  agent: email_extractor
+  context: []
+  tools: []
+  async_execution: false
+
+draft_response:
+  description: >
+    Compose a professional and contextually appropriate email response based on the 
+    original email content and any additional context provided. Consider:
+    
+    - Response Tone: Match the appropriate professional level and formality
+    - Content Structure: Logical flow with clear addressing of all points
+    - Business Etiquette: Proper greetings, acknowledgments, and closings
+    - Action Items: Clear next steps and expectations
+    - Timeline Management: Appropriate urgency and deadline considerations
+    - Relationship Context: Maintain or improve professional relationships
+    - Company Voice: Consistent with organizational communication style
+    - Legal/Compliance: Ensure appropriate disclaimers if required
+    
+    Email to respond to: {email_content}
+    Additional Context: {context}
+    
+    The response should address all relevant points from the original email while 
+    maintaining professionalism and clarity. Include appropriate call-to-actions 
+    and next steps where applicable.
+  expected_output: >
+    A complete, professional email response including:
+    1. Subject Line: Appropriate and clear subject for the response
+    2. Greeting: Professional salutation matching the relationship level
+    3. Acknowledgment: Recognition of received message and key points
+    4. Main Content: Structured response addressing all relevant topics
+    5. Action Items: Clear next steps and expectations for all parties
+    6. Timeline: Appropriate deadlines and scheduling considerations
+    7. Contact Information: Relevant contact details and availability
+    8. Professional Closing: Appropriate sign-off and signature
+    9. Tone Assessment: Explanation of chosen communication style
+    10. Alternative Versions: Optional variations for different scenarios
+  agent: email_drafter
+  context: []
+  tools: []
+  async_execution: false
+
+process_pipeline:
+  description: >
+    Orchestrate the complete email processing pipeline by coordinating multiple 
+    specialized agents to provide comprehensive email analysis and response generation. 
+    This involves:
+    
+    - Initial Email Assessment: Quick triage and routing decisions
+    - Security Evaluation: Spam/threat detection and risk assessment
+    - Information Extraction: Structured data mining and categorization
+    - Context Analysis: Business relevance and priority determination
+    - Response Strategy: Appropriate handling and response planning
+    - Quality Control: Verification and optimization of all outputs
+    - Workflow Coordination: Managing agent collaboration and task dependencies
+    - Final Integration: Combining all analyses into actionable insights
+    
+    Delegate specific tasks to appropriate specialists while maintaining oversight 
+    of the entire process. Ensure all components work together effectively and 
+    provide a unified, comprehensive result.
+  expected_output: >
+    A complete email processing report containing:
+    1. Executive Summary: High-level overview of email analysis and recommendations
+    2. Security Assessment: Comprehensive spam/threat evaluation with risk score
+    3. Structured Data: All extracted information organized by category
+    4. Business Analysis: Priority, urgency, and impact assessment
+    5. Response Recommendations: Suggested handling strategies and response options
+    6. Process Workflow: Summary of all processing steps and agent contributions
+    7. Quality Metrics: Confidence scores and validation results
+    8. Next Steps: Clear action items and workflow recommendations
+    9. Integration Notes: How this email fits into broader communication patterns
+    10. System Feedback: Performance insights and optimization suggestions
+  agent: pipeline_coordinator
+  context: []
+  tools: []
+  async_execution: false
+
+# Task templates for common scenarios
+templates:
+  customer_service_response:
+    description: "Generate customer service response for support inquiries"
+    expected_output: "Professional customer service email with solution and follow-up"
+    
+  business_inquiry_response:
+    description: "Handle business partnership or sales inquiries"
+    expected_output: "Strategic business response with next steps and contact information"
+    
+  internal_communication:
+    description: "Process internal company communications and announcements"
+    expected_output: "Appropriate internal response or acknowledgment"
+    
+  meeting_coordination:
+    description: "Handle meeting requests and scheduling communications"
+    expected_output: "Meeting response with availability and logistics"
+
+# Common task settings
+default_settings:
+  max_execution_time: 180
+  human_input: false
+  async_execution: false
+  context: []
+  tools: []
